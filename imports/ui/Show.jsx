@@ -15,18 +15,20 @@ export default class Show extends Component {
     return (
       <li>
         <p>{this.props.show.name}</p>
-        {this.props.show.link ? this.renderLink() : this.renderLoading()}
+        {this.renderLink()}
       </li>
     );
   }
   renderLink() {
+    if (this.props.show.link) {
+      return (
+        <a href={this.props.show.link}>Download</a>
+      );
+    } else if (this.props.show.link === null) {
+      return ('No results');
+    }
     return (
-      <a href={this.props.show.link}>Download</a>
-    );
-  }
-  renderLoading() {
-    return (
-      this.props.show.link === null ? 'No results' : 'Loading link...'
+      'Loading link...'
     );
   }
 }
