@@ -1,0 +1,61 @@
+{
+  "name": "show",
+  "plural": "shows",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "tvt_id": {
+      "type": "number",
+      "required": true
+    },
+    "tvdb_id": {
+      "type": "number",
+      "required": true
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "overview": {
+      "type": "string",
+      "required": true
+    },
+    "last_aired": {
+      "type": "object"
+    },
+    "next_aired": {
+      "type": "object"
+    },
+    "status": {
+      "type": "string",
+      "required": true
+    },
+    "all_images": {
+      "type": "object"
+    },
+    "aired_episodes": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    },
+    "hashtag": {
+      "type": "string"
+    },
+    "number_of_seasons": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    },
+    "runtime": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
