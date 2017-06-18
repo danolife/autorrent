@@ -2,14 +2,15 @@
   "name": "show",
   "plural": "shows",
   "base": "PersistedModel",
-  "idInjection": true,
+  "idInjection": false,
   "options": {
     "validateUpsert": true
   },
   "properties": {
     "id": {
       "type": "number",
-      "required": true
+      "required": true,
+      "id": true
     },
     "name": {
       "type": "string",
