@@ -1,7 +1,7 @@
 {
   "name": "show",
   "plural": "shows",
-  "base": "Model",
+  "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
