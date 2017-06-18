@@ -1,5 +1,1 @@
-'use strict';
-
-module.exports = function(Episode) {
-
-};
+module.exports = function(Episode) {};

@@ -8,7 +8,8 @@
   "scripts": {
     "lint": "eslint .",
     "start": "node .",
-    "posttest": "npm run lint && nsp check"
+    "posttest": "npm run lint && nsp check",
+    "precommit": "lint-staged"
   },
   "dependencies": {
     "compression": "^1.0.3",
@@ -25,11 +26,20 @@
   "devDependencies": {
     "eslint": "^3.17.1",
     "eslint-config-loopback": "^8.0.0",
-    "nsp": "^2.1.0"
+    "husky": "^0.13.4",
+    "lint-staged": "^4.0.0",
+    "nsp": "^2.1.0",
+    "prettier": "^1.4.4"
   },
   "repository": {
     "type": "",
     "url": ""
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "license": "UNLICENSED",
   "description": "autorrent"
