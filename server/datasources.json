@@ -2,5 +2,13 @@
   "db": {
     "name": "db",
     "connector": "memory"
+  },
+  "mongoDs": {
+    "host": "localhost",
+    "port": 27017,
+    "url": "mongodb://localhost:27017/autorrent",
+    "database": "autorrent",
+    "name": "mongoDs",
+    "connector": "mongodb"
   }
 }
