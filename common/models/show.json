@@ -7,11 +7,7 @@
     "validateUpsert": true
   },
   "properties": {
-    "tvt_id": {
-      "type": "number",
-      "required": true
-    },
-    "tvdb_id": {
+    "id": {
       "type": "number",
       "required": true
     },
@@ -55,7 +51,13 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "episodes": {
+      "type": "hasMany",
+      "model": "episode",
+      "foreignKey": "id"
+    }
+  },
   "acls": [],
   "methods": {}
 }

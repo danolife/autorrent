@@ -1,0 +1,66 @@
+{
+  "name": "episode",
+  "plural": "episodes",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "id": {
+      "type": "number",
+      "required": true
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "number": {
+      "type": "number",
+      "required": true
+    },
+    "season_number": {
+      "type": "number"
+    },
+    "air_date": {
+      "type": "string"
+    },
+    "air_time": {
+      "type": "string"
+    },
+    "network": {
+      "type": "string"
+    },
+    "overview": {
+      "type": "any"
+    },
+    "images": {
+      "type": "object"
+    },
+    "nb_comments": {
+      "type": "number"
+    },
+    "is_new": {
+      "type": "boolean"
+    },
+    "seen": {
+      "type": "boolean"
+    },
+    "previous_episode": {
+      "type": "any"
+    },
+    "next_episode": {
+      "type": "any"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "show": {
+      "type": "belongsTo",
+      "model": "show",
+      "foreignKey": "id"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

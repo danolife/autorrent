@@ -14,7 +14,8 @@
     ]
   },
   "User": {
-    "dataSource": "db"
+    "dataSource": "db",
+    "public": false
   },
   "AccessToken": {
     "dataSource": "db",
@@ -36,6 +37,10 @@
     "public": false
   },
   "show": {
+    "dataSource": "db",
+    "public": true
+  },
+  "episode": {
     "dataSource": "db",
     "public": true
   }
