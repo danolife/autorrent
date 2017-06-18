@@ -1,0 +1,7 @@
+{
+  "secret": "ThisTokenIsNotSecretChangeIt!",
+  "tvt-login": {
+    "clientID": "CLIENT_ID_TO_CHANGE",
+    "clientSecret": "CLIENT_SECRET_TO_CHANGE"
+  }
+}

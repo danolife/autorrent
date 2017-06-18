@@ -18,5 +18,15 @@
       "limit": "100kb"
     },
     "cors": false
+  },
+  "tvt-login": {
+    "provider": "tvt",
+    "module": "passport-oauth2",
+    "authorizationURL": "https://www.tvtime.com/oauth/authorize",
+    "tokenURL": "https://api.tvshowtime.com/v1/oauth/access_token",
+    "callbackURL": "http://localhost:3000/auth/tvt/callback",
+    "authPath": "/auth/tvt",
+    "callbackPath": "/auth/tvt/callback",
+    "successRedirect": "/"
   }
 }
