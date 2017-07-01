@@ -54,6 +54,8 @@ app.start = function() {
     app.emit('started');
     let baseUrl = app.get('url').replace(/\/$/, '');
     console.log('Web server listening at: %s', baseUrl);
+    let loginPath = config['tvt-login']['authPath'];
+    console.log('Login with TVTime here: %s%s', baseUrl, loginPath);
     if (app.get('loopback-component-explorer')) {
       let explorerPath = app.get('loopback-component-explorer').mountPath;
       console.log('Browse your REST API at %s%s', baseUrl, explorerPath);
