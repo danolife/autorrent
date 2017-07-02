@@ -1,30 +1,71 @@
 'use strict';
 const request = require('request');
+const app = require('../server');
 
 module.exports = {
-  getUserInfo: function() {
+  getUserInfo: function(req) {
     return new Promise((resolve, reject) => {
-      let url = 'https://api.tvshowtime.com/v1/user';
-      request(
-        {
-          url: url,
-          qs: {
-            access_token: 'afa50306517a2b77e0aa8ba3a90be37b'
-          }
-        },
-        function(error, response, body) {
-          if (error) {
-            console.log('error:', error);
-            reject(error);
-          }
-          console.log(
-            'Status: %s, URL: %s',
-            response && response.statusCode,
-            url
+      getTvtAccessToken(req)
+        .then(function(accessToken) {
+          let url = 'https://api.tvshowtime.com/v1/user';
+          request(
+            {
+              url: url,
+              qs: {
+                access_token: accessToken
+              }
+            },
+            function(error, response, body) {
+              if (error) {
+                console.log('error:', error);
+                reject(error);
+              }
+              console.log(
+                'Status: %s, URL: %s',
+                response && response.statusCode,
+                url
+              );
+              resolve(body);
+            }
           );
-          resolve(body);
-        }
-      );
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
     });
   }
 };
+
+function getCurrentUser(req) {
+  let UserIdentityModel = app.models.UserIdentity;
+  let userId = req.accessToken.userId;
+  return new Promise((resolve, reject) => {
+    UserIdentityModel.findOne({ user: userId })
+      .then(function(userIdentity) {
+        if (userIdentity) {
+          resolve(userIdentity);
+        } else {
+          reject("Couldn't find user identity");
+        }
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
+  });
+}
+
+function getTvtAccessToken(app, req) {
+  return new Promise((resolve, reject) => {
+    getCurrentUser(app, req)
+      .then(function(userIdentity) {
+        if (userIdentity.credentials.accessToken) {
+          resolve(userIdentity.credentials.accessToken);
+        } else {
+          reject("Couldn't find access token");
+        }
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
+  });
+}
