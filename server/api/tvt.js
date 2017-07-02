@@ -25,7 +25,10 @@ module.exports = {
                 response && response.statusCode,
                 url
               );
-              resolve(body);
+
+              let user = JSON.parse(body).user;
+
+              resolve(user);
             }
           );
         })
@@ -37,7 +40,7 @@ module.exports = {
 };
 
 function getCurrentUser(req) {
-  let UserIdentityModel = app.models.UserIdentity;
+  let UserIdentityModel = app.models.userIdentity;
   let userId = req.accessToken.userId;
   return new Promise((resolve, reject) => {
     UserIdentityModel.findOne({ user: userId })

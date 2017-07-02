@@ -14,19 +14,19 @@
       "./mixins"
     ]
   },
-  "User": {
+  "user": {
     "dataSource": "db",
     "public": true
   },
-  "AccessToken": {
+  "accessToken": {
     "dataSource": "db",
     "public": false
   },
-  "UserCredential": {
+  "userCredential": {
     "dataSource": "db",
     "public": false
   },
-  "UserIdentity": {
+  "userIdentity": {
     "dataSource": "db",
     "public": false
   },
