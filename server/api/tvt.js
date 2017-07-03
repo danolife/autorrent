@@ -1,5 +1,7 @@
 'use strict';
 const request = require('request');
+const app = require('../server');
+const UserModel = app.models.user;
 
 module.exports = {
   getUserInfo: function(user) {
@@ -38,22 +40,10 @@ module.exports = {
   }
 };
 
-function getTvtIdentity(user) {
-  return new Promise((resolve, reject) => {
-    let identities = user.identities();
-    identities.forEach(identity => {
-      if (identity.provider === 'tvt') {
-        resolve(identity);
-      }
-    });
-    reject("Couldn't find tvt identity");
-  });
-}
-
 function getTvtAccessToken(user) {
   return new Promise((resolve, reject) => {
-    getTvtIdentity(user)
-      .then(function(userIdentity) {
+    UserModel.getIdentity(user)
+      .then(userIdentity => {
         if (userIdentity.credentials.accessToken) {
           resolve(userIdentity.credentials.accessToken);
         } else {

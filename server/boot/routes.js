@@ -17,12 +17,9 @@ module.exports = function(app) {
         .then(userInfo => {
           user.username = userInfo.name;
 
-          let identities = user.identities();
-          identities.forEach(identity => {
-            if (identity.provider === 'tvt') {
-              identity.profile = userInfo;
-              identity.save();
-            }
+          UserModel.getIdentity(user).then(identity => {
+            identity.profile = userInfo;
+            identity.save();
           });
 
           user.save();
