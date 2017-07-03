@@ -1,11 +1,10 @@
 'use strict';
 const request = require('request');
-const app = require('../server');
 
 module.exports = {
-  getUserInfo: function(req) {
+  getUserInfo: function(user) {
     return new Promise((resolve, reject) => {
-      getTvtAccessToken(req)
+      getTvtAccessToken(user)
         .then(function(accessToken) {
           let url = 'https://api.tvshowtime.com/v1/user';
           request(
@@ -39,27 +38,21 @@ module.exports = {
   }
 };
 
-function getCurrentUser(req) {
-  let UserIdentityModel = app.models.userIdentity;
-  let userId = req.accessToken.userId;
+function getTvtIdentity(user) {
   return new Promise((resolve, reject) => {
-    UserIdentityModel.findOne({ user: userId })
-      .then(function(userIdentity) {
-        if (userIdentity) {
-          resolve(userIdentity);
-        } else {
-          reject("Couldn't find user identity");
-        }
-      })
-      .catch(function(err) {
-        console.log(err);
-      });
+    let identities = user.identities();
+    identities.forEach(identity => {
+      if (identity.provider === 'tvt') {
+        resolve(identity);
+      }
+    });
+    reject("Couldn't find tvt identity");
   });
 }
 
-function getTvtAccessToken(app, req) {
+function getTvtAccessToken(user) {
   return new Promise((resolve, reject) => {
-    getCurrentUser(app, req)
+    getTvtIdentity(user)
       .then(function(userIdentity) {
         if (userIdentity.credentials.accessToken) {
           resolve(userIdentity.credentials.accessToken);

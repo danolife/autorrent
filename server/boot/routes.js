@@ -13,7 +13,7 @@ module.exports = function(app) {
       }
 
       tvtApi
-        .getUserInfo(req)
+        .getUserInfo(user)
         .then(userInfo => {
           user.username = userInfo.name;
 
