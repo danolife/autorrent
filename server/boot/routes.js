@@ -1,9 +1,9 @@
 const tvtApi = require('../api/tvt');
+const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
 
 module.exports = function(app) {
   let UserModel = app.models.user;
-
-  app.get('/getUserProfile', function(req, res) {
+  app.get('/getUserProfile', ensureLoggedIn('/auth/tvt'), function(req, res) {
     let userId = req.accessToken.userId;
 
     UserModel.findOne({ id: userId, include: ['identities'] }).then(user => {
